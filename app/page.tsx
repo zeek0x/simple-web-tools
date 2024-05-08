@@ -1,18 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { useInterval } from "usehooks-ts";
 
 export default function Home() {
-  const [time, setTime] = useState(format(new Date()));
+  const [date, setDate] = useState(new Date());
 
-  setInterval(() => {
-    const now = new Date();
-    setTime(format(now));
-  });
+  useInterval(() => {
+    setDate(new Date());
+  }, 1);
 
   return (
     <main>
-      <h1> {time} </h1>
+      <h1> {format(date)} </h1>
     </main>
   );
 }

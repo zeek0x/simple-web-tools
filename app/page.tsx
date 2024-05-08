@@ -19,11 +19,11 @@ export default function Home() {
 
 const format = (date: Date): string => {
   const yyyy = date.getFullYear();
-  const mm = date.getMonth();
-  const dd = date.getDate();
-  const HH = date.getHours();
-  const MM = date.getMinutes();
-  const ss = date.getSeconds();
-  const SSS = date.getMilliseconds();
-  return `${yyyy}/${mm}/${dd} ${HH} ${MM} ${ss}.${SSS}`;
+  const mm = ("0" + (date.getMonth() + 1)).slice(-2);
+  const dd = ("0" + date.getDate()).slice(-2);
+  const HH = ("0" + date.getHours()).slice(-2);
+  const MM = ("0" + date.getMinutes()).slice(-2);
+  const ss = ("0" + date.getSeconds()).slice(-2);
+  const SSS = ("00" + date.getMilliseconds()).slice(-3);
+  return `${yyyy}-${mm}-${dd}T${HH}:${MM}:${ss}.${SSS}`;
 };

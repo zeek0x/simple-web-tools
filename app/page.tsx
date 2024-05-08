@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <main>
-      <h1> {format(date)} </h1>
+      <h1 suppressHydrationWarning={true}> {format(date)} </h1>
     </main>
   );
 }

@@ -14,8 +14,13 @@ export default function Home() {
   }, []);
 
   return (
-    <main>
-      <h1 suppressHydrationWarning={true}> {format(date)} </h1>
+    <main className="h-screen w-screen flex justify-center items-center">
+      <h1
+        className="text-9xl font-bold font-mono"
+        suppressHydrationWarning={true}
+      >
+        {format(date)}
+      </h1>
     </main>
   );
 }

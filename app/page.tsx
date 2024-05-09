@@ -28,5 +28,5 @@ const format = (date: Date): string => {
   const MM = ("0" + date.getMinutes()).slice(-2);
   const ss = ("0" + date.getSeconds()).slice(-2);
   const SSS = ("00" + date.getMilliseconds()).slice(-3);
-  return `${yyyy}-${mm}-${dd}T${HH}:${MM}:${ss}.${SSS}`;
+  return `${yyyy}-${mm}-${dd} ${HH}:${MM}:${ss}.${SSS}`;
 };

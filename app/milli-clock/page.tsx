@@ -16,7 +16,7 @@ export default function Home() {
   return (
     <main className="h-screen w-screen flex justify-center items-center">
       <h1
-        className="text-9xl font-bold tabular-nums"
+        className="text-[6vw] font-bold tabular-nums"
         suppressHydrationWarning={true}
       >
         {format(date)}

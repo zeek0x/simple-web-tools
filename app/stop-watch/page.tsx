@@ -11,6 +11,7 @@ export default function Home() {
   });
   const [isRunning, setIsRunning] = useState(false);
 
+  // Update time
   useEffect(() => {
     const timerId = setInterval(() => {
       if (isRunning) {
@@ -21,6 +22,37 @@ export default function Home() {
     return () => clearInterval(timerId);
   }, [isRunning, time]);
 
+  const start = () => {
+    setIsRunning(true);
+    const date = new Date();
+    setTime({ ...time, startAt: date, updatedAt: date });
+  };
+
+  const stop = () => {
+    setIsRunning(false);
+    const date = new Date();
+    setTime({
+      startAt: date,
+      updatedAt: date,
+      offset: time.offset + time.updatedAt.getTime() - time.startAt.getTime(),
+    });
+  };
+
+  const handleKeyPress = (event: KeyboardEvent) => {
+    if (event.code === "Space") {
+      !isRunning ? start() : stop();
+    }
+  };
+
+  // Key event
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  });
+
   return (
     <main className="h-screen w-screen flex flex-col justify-center items-center">
       <h1 className="text-[6vw] font-bold tabular-nums">
@@ -30,24 +62,7 @@ export default function Home() {
       </h1>
       <div>
         <div className="flex justify-center space-x-4">
-          {!isRunning
-            ? createStartButton(() => {
-                setIsRunning(true);
-                const date = new Date();
-                setTime({ ...time, startAt: date, updatedAt: date });
-              })
-            : createPauseButton(() => {
-                setIsRunning(false);
-                const date = new Date();
-                setTime({
-                  startAt: date,
-                  updatedAt: date,
-                  offset:
-                    time.offset +
-                    time.updatedAt.getTime() -
-                    time.startAt.getTime(),
-                });
-              })}
+          {!isRunning ? createStartButton(start) : createPauseButton(stop)}
           {createResetButton(() => {
             setIsRunning(false);
             const date = new Date();

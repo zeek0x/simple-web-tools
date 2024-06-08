@@ -38,6 +38,12 @@ export default function Home() {
     });
   };
 
+  const reset = () => {
+    setIsRunning(false);
+    const date = new Date();
+    setTime({ startAt: date, updatedAt: date, offset: 0 });
+  };
+
   return (
     <main className="h-screen w-screen flex flex-col justify-center items-center">
       <h1 className="text-[6vw] font-bold tabular-nums">
@@ -48,11 +54,7 @@ export default function Home() {
       <div>
         <div className="flex justify-center space-x-4">
           {!isRunning ? createStartButton(start) : createPauseButton(stop)}
-          {createResetButton(() => {
-            setIsRunning(false);
-            const date = new Date();
-            setTime({ startAt: date, updatedAt: date, offset: 0 });
-          })}
+          {createResetButton(reset)}
         </div>
       </div>
     </main>

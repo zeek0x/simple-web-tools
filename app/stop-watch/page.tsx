@@ -38,21 +38,6 @@ export default function Home() {
     });
   };
 
-  const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.code === "Space") {
-      !isRunning ? start() : stop();
-    }
-  };
-
-  // Key event
-  useEffect(() => {
-    window.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyPress);
-    };
-  });
-
   return (
     <main className="h-screen w-screen flex flex-col justify-center items-center">
       <h1 className="text-[6vw] font-bold tabular-nums">

@@ -15,7 +15,7 @@ export default function Home() {
   useEffect(() => {
     const timerId = setInterval(() => {
       if (isRunning) {
-        setTime({ ...time, updatedAt: new Date() });
+        setTime((time) => ({ ...time, updatedAt: new Date() }));
       }
     }, 10);
 
@@ -25,17 +25,17 @@ export default function Home() {
   const start = () => {
     setIsRunning(true);
     const date = new Date();
-    setTime({ ...time, startAt: date, updatedAt: date });
+    setTime((time) => ({ ...time, startAt: date, updatedAt: date }));
   };
 
   const stop = () => {
     setIsRunning(false);
     const date = new Date();
-    setTime({
+    setTime((time) => ({
       startAt: date,
       updatedAt: date,
       offset: time.offset + time.updatedAt.getTime() - time.startAt.getTime(),
-    });
+    }));
   };
 
   const reset = () => {

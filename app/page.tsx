@@ -9,6 +9,11 @@ export default function Home() {
         " A simple clock that provides the current time in milliseconds."
       )}
       {createPageComponent("stop-watch", "Stop Watch", " A simple stop watch.")}
+      {createPageComponent(
+        "user-agent-checker",
+        "User Agent Checker",
+        "A Simple User Agent Checker"
+      )}
     </main>
   );
 }

@@ -14,6 +14,11 @@ export default function Home() {
         "User Agent Checker",
         "A Simple User Agent Checker"
       )}
+      {createPageComponent(
+        "multi-counter",
+        "Multi Counter",
+        "A Simple multiple counter"
+      )}
     </main>
   );
 }

@@ -34,6 +34,16 @@ export default function Home() {
     setCounters([...counters.slice(0, idx), ...counters.slice(idx + 1)]);
   };
 
+  const onChange = (id: string, count: number) => {
+    const idx = counters.findIndex((counter) => counter.id === id);
+    const counter = counters[idx];
+    setCounters([
+      ...counters.slice(0, idx),
+      { ...counter, count },
+      ...counters.slice(idx + 1),
+    ]);
+  };
+
   const onCreate = () => {
     setCounters([...counters, { id: generateId(), count: 0 }]);
   };
@@ -47,6 +57,7 @@ export default function Home() {
           value={counter.count}
           onIncrement={() => onIncrement(counter.id)}
           onDecrement={() => onDecrement(counter.id)}
+          onChange={(count: number) => onChange(counter.id, count)}
           onDestroy={() => onDestroy(counter.id)}
         />
       ))}
@@ -60,6 +71,7 @@ type CounterProps = {
   value: number;
   onIncrement: () => void;
   onDecrement: () => void;
+  onChange: (count: number) => void;
   onDestroy: () => void;
 };
 
@@ -68,6 +80,7 @@ function Counter({
   value,
   onIncrement,
   onDecrement,
+  onChange,
   onDestroy,
 }: CounterProps) {
   return (
@@ -80,8 +93,13 @@ function Counter({
       </button>
       <input
         value={value}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+          const newValue = parseInt(e.target.value, 10);
+          if (!isNaN(newValue)) {
+            onChange(newValue);
+          }
+        }}
         className="w-36 h-12 p-2 text-center bg-gray-800 text-gray-200 border border-gray-600 rounded-l-lg focus:outline-none"
-        readOnly
       />
       <div className="flex flex-col">
         <button
